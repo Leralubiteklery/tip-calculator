@@ -41,14 +41,11 @@ class CalculatorVC: UIViewController {
     
     private func bind() {
         let input = CalculatorViewModel.Input(
-            billPublisher: Just(10).eraseToAnyPublisher(),
-            tipPublisher: Just(.tenPercent).eraseToAnyPublisher(),
-            splitPublisher: Just(5).eraseToAnyPublisher()
+            billPublisher: billInputView.valuePublisher,
+            tipPublisher: tipInputView.valuePublisher,
+            splitPublisher: splitInputView.valuePublisher
         )
         let output = viewModel.transform(input: input)
-        output.updateViewPublisher.sink { result in
-            print(">>>> \(result)")
-        }.store(in: &cancellables)
     }
     
     private func layout() {
