@@ -19,7 +19,7 @@ class CalculatorViewModel {
     
     struct Output {
         let updateViewPublisher: AnyPublisher<Result, Never>
-        let resultCalculatorPublisher: AnyPublisher<Void, Never>
+        let resetCalculatorPublisher: AnyPublisher<Void, Never>
     }
     
     func transform(input: Input) -> Output {
@@ -40,9 +40,9 @@ class CalculatorViewModel {
             return Just(result)
         }.eraseToAnyPublisher()
         
-        let resultCalculatorPublsiher = input.logoViewTapPublisher
+        let resultCalculatorPublisher = input.logoViewTapPublisher
         
-        return Output(updateViewPublisher: updateViewPublisher, resultCalculatorPublisher: resultCalculatorPublsiher)
+        return Output(updateViewPublisher: updateViewPublisher, resetCalculatorPublisher: resultCalculatorPublisher)
     }
     
     private func getTipAccount(bill: Double, tip: Tip) -> Double {
